@@ -1,11 +1,11 @@
-export default function Inventario() {
+export default function AboutUs() {
     // só para o botão funcionar
     return (
         <main className="min-h-screen flex flex-col items-center justify-center gap-5 bg-black px-6">
             <div className="w-full max-w-2xl text-center">
-                <h1 className="text-3xl font-bold mb-4">Inventário</h1>
+                <h1 className="text-3xl font-bold mb-4">Recrutas</h1>
                 <p className="text-lg text-white">
-                    Bem-vindo ao inventário!
+                    Conhece as recrutas!
                 </p>
             </div>
 
@@ -19,6 +19,7 @@ export default function Inventario() {
                     </a>
                 </div>
             </div>
+
         </main>
     );
 }
