@@ -1,29 +1,47 @@
-'use client';
-
-import { useEffect, useRef, useState, createElement, useMemo, useCallback } from 'react';
+import { useEffect, useRef, useState, useMemo, useCallback } from 'react';
 import { gsap } from 'gsap';
 
-const TextType = ({
+/**
+ * A interface define a forma do objeto que é passado como argumento à função useTextType.
+ * 
+ * text: o texto ou array de textos a serem mostrados (unico argumento obrigatório)
+ * textColors: array de cores para o texto, caso haja várias frases e queira cores diferentes para cada
+ */
+interface Args {
+    text: string | string[],
+    typingSpeed?: number,
+    initialDelay?: number,
+    pauseDuration?: number,
+    deletingSpeed?: number,
+    loop?: boolean,
+    showCursor?: boolean,
+    hideCursorWhileTyping?: boolean,
+    cursorBlinkDuration?: number,
+    textColors?: string[],
+    variableSpeed?: { min: number, max: number } | null,
+    onSentenceComplete?: (completedSentence: string, sentenceIndex: number) => void,
+    startOnVisible?: boolean,
+    reverseMode?: boolean,
+}
+
+// aqui estamos a extrair propriedades do objeto que é passado quando chamamos a função useTextType
+export function useTextType({
+    // os valores são definidos quando chamo a função
     text,
-    as: Component = 'div',
     typingSpeed = 50,
     initialDelay = 0,
     pauseDuration = 2000,
     deletingSpeed = 30,
     loop = true,
-    className = '',
     showCursor = true,
     hideCursorWhileTyping = false,
-    cursorCharacter = '|',
-    cursorClassName = '',
     cursorBlinkDuration = 0.5,
     textColors = [],
     variableSpeed,
     onSentenceComplete,
     startOnVisible = false,
     reverseMode = false,
-    ...props
-}) => {
+}: Args) {
     const [displayedText, setDisplayedText] = useState('');
     const [currentCharIndex, setCurrentCharIndex] = useState(0);
     const [isDeleting, setIsDeleting] = useState(false);
@@ -40,9 +58,10 @@ const TextType = ({
         return Math.random() * (max - min) + min;
     }, [variableSpeed, typingSpeed]);
 
+    // Define a cor atual do texto com base no índice da frase (caso tenha mais que uma frase e queira cores diferentes)
     const getCurrentTextColor = () => {
-        if (textColors.length === 0) return;
-        return textColors[currentTextIndex % textColors.length];
+        //if (textColors.length === 0) return;
+        return textColors[currentTextIndex % textColors.length] || 'inherit';
     };
 
     useEffect(() => {
@@ -79,15 +98,17 @@ const TextType = ({
     useEffect(() => {
         if (!isVisible) return;
 
-        let timeout;
+        let timeout: ReturnType<typeof setTimeout>;
 
         const currentText = textArray[currentTextIndex];
         const processedText = reverseMode ? currentText.split('').reverse().join('') : currentText;
 
         const executeTypingAnimation = () => {
             if (isDeleting) {
+
                 if (displayedText === '') {
                     setIsDeleting(false);
+
                     if (currentTextIndex === textArray.length - 1 && !loop) {
                         return;
                     }
@@ -98,27 +119,32 @@ const TextType = ({
 
                     setCurrentTextIndex(prev => (prev + 1) % textArray.length);
                     setCurrentCharIndex(0);
+
                     timeout = setTimeout(() => { }, pauseDuration);
+
                 } else {
                     timeout = setTimeout(() => {
                         setDisplayedText(prev => prev.slice(0, -1));
                     }, deletingSpeed);
                 }
+
             } else {
                 if (currentCharIndex < processedText.length) {
                     timeout = setTimeout(
                         () => {
                             setDisplayedText(prev => prev + processedText[currentCharIndex]);
                             setCurrentCharIndex(prev => prev + 1);
-                        },
-                        variableSpeed ? getRandomSpeed() : typingSpeed
+                        }, variableSpeed ? getRandomSpeed() : typingSpeed
                     );
+
                 } else if (textArray.length >= 1) {
                     if (!loop && currentTextIndex === textArray.length - 1) return;
+
                     timeout = setTimeout(() => {
                         setIsDeleting(true);
                     }, pauseDuration);
                 }
+
             }
         };
 
@@ -129,7 +155,6 @@ const TextType = ({
         }
 
         return () => clearTimeout(timeout);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [
         currentCharIndex,
         displayedText,
@@ -148,27 +173,15 @@ const TextType = ({
     ]);
 
     const shouldHideCursor =
-        hideCursorWhileTyping && (currentCharIndex < textArray[currentTextIndex].length || isDeleting);
+        hideCursorWhileTyping &&
+        (currentCharIndex < textArray[currentTextIndex].length || isDeleting);
 
-    return createElement(
-        Component,
-        {
-            ref: containerRef,
-            className: `inline-block whitespace-pre-wrap tracking-tight ${className}`,
-            ...props
-        },
-        <span className="inline" style={{ color: getCurrentTextColor() || 'inherit' }}>
-            {displayedText}
-        </span>,
-        showCursor && (
-            <span
-                ref={cursorRef}
-                className={`ml-1 inline-block opacity-100 ${shouldHideCursor ? 'hidden' : ''} ${cursorClassName}`}
-            >
-                {cursorCharacter}
-            </span>
-        )
-    );
-};
+    return {
+        displayedText,
+        getCurrentTextColor,
+        cursorRef,
+        containerRef,
+        shouldHideCursor
+    };
+}
 
-export default TextType;
