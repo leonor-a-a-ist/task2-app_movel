@@ -1,37 +1,37 @@
-# RECURSOS
+# Estrutura dos Ficheiros Principais 
 
-* Shared layouts:
-    https://nextjs.org/docs/pages/guides/mdx
+Este projeto é uma aplicação web desenvolvida em Next.js, que permite gerir um inventário de materiais, utilizando o Airtable como base de dados e Airtable Automations para notificações por email.
 
-* Documentação Typescript
-    https://www.typescriptlang.org/
+## src/pages/inventario.tsx
+Este ficheiro corresponde à página principal do inventário.
 
-* Documentação Tailwind CSS
-    https://tailwindcss.com/
+É responsável por:
 
+    Mostrar a lista de materiais
+    Criar novos materiais
+    Editar materiais existentes
+    Eliminar materiais
+    Destacar visualmente materiais com stock baixo
 
+## src/pages/api/materials.ts
+Este ficheiro implementa a API, que funciona como backend da aplicação.
 
+É responsável por:
 
+    Comunicar com a API do Airtable
+    Converter dados entre o formato do Airtable e o formato usado no frontend
+    Centralizar toda a lógica de acesso aos dados
 
+Endpoints implementados:
 
-# Biblioteca externa usada
-No projeto foi integrada a biblioteca GSAP, que serve para criar animações em aplicações web. É usada para implementar uma animação de escrita (typing animation) no título da homepage "recrutamento Software".
-O componente foi integrado no projeto a partir do seguinte recurso:
-https://reactbits.dev/text-animations/text-type
+    GET /api/materials
+    Obtém todos os materiais do Airtable e calcula se estão em stock baixo.
 
+    POST /api/materials
+    Cria um novo material.
 
-# O que aprendemos, e dúvidas que restam:
+    PATCH /api/materials
+    Atualiza campos de um material existente.
 
-Maria:
-
-
-Leonor:
-
-
-
-# Notas:
-- 
-
-
-# Link do repositório GitHub
-https://github.com/leonor-a-a-ist/task2-app_movel
+    DELETE /api/materials
+    Remove um material pelo seu Record ID.
