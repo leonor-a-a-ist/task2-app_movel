@@ -2,12 +2,9 @@ import { useEffect, useRef, useState, useMemo, useCallback } from 'react';
 import { gsap } from 'gsap';
 
 /**
- * A interface define a forma do objeto que é passado como argumento à função useTextType.
- * 
- * text: o texto ou array de textos a serem mostrados (unico argumento obrigatório)
- * textColors: array de cores para o texto, caso haja várias frases e queira cores diferentes para cada
+ * Define os argumentos aceites pelo hook useTextType.
  */
-interface Args {
+export interface UseTextTypeArgs {
     text: string | string[],
     typingSpeed?: number,
     initialDelay?: number,
@@ -24,9 +21,11 @@ interface Args {
     reverseMode?: boolean,
 }
 
-// aqui estamos a extrair propriedades do objeto que é passado quando chamamos a função useTextType
+/**
+ * Hook responsável pela lógica de escrita/apagar
+ * Trata apenas da animação (parte lógica)
+ */
 export function useTextType({
-    // os valores são definidos quando chamo a função
     text,
     typingSpeed = 50,
     initialDelay = 0,
@@ -41,12 +40,13 @@ export function useTextType({
     onSentenceComplete,
     startOnVisible = false,
     reverseMode = false,
-}: Args) {
+}: UseTextTypeArgs) {
     const [displayedText, setDisplayedText] = useState('');
     const [currentCharIndex, setCurrentCharIndex] = useState(0);
     const [isDeleting, setIsDeleting] = useState(false);
     const [currentTextIndex, setCurrentTextIndex] = useState(0);
     const [isVisible, setIsVisible] = useState(!startOnVisible);
+
     const cursorRef = useRef(null);
     const containerRef = useRef(null);
 
@@ -58,9 +58,7 @@ export function useTextType({
         return Math.random() * (max - min) + min;
     }, [variableSpeed, typingSpeed]);
 
-    // Define a cor atual do texto com base no índice da frase (caso tenha mais que uma frase e queira cores diferentes)
     const getCurrentTextColor = () => {
-        //if (textColors.length === 0) return;
         return textColors[currentTextIndex % textColors.length] || 'inherit';
     };
 

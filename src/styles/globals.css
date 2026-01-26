@@ -1,26 +1,29 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+    /* Cores de fundo e letra globais */
+    --background: #171717;
+    --foreground: white;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/*
+    px: pixeis - absoluto
+    em: relativo ao tamanho da fonte do elemento pai
+    rem: relativo ao tamanho da fonte raiz (html)
+*/
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+    background: var(--background);
+    color: var(--foreground);
+
+    /* Esconder a scrollbar */
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+/* Estilo padrão dos parágrafos */
+p {
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
