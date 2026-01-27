@@ -5,7 +5,7 @@ export default function AboutUs() {
         <div className="flex flex-col items-center min-h-screen p-8 bg-neutral-900 gap-12 md:gap-14 ">
 
             {/* Título */}
-            <h1 className="font-bold text-4xl lg:text-5xl ">
+            <h1 className="font-bold text-4xl">
                 Recrutas
             </h1>
 

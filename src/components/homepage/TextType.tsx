@@ -18,15 +18,17 @@ interface TextTypeProps extends UseTextTypeArgs {
  * Componente visual que usa o hook useTextType
  * É responsável apenas pela renderização do texto e do cursor
  */
-const TextType = ({
+export default function TextType ({
     text,
-    as: Component = 'div',
+    as: Component = 'div',  // elemento a usar como wrapper
     className = '',
     showCursor = true,
     cursorCharacter = '|',
     cursorClassName = '',
     ...hookProps
-}: TextTypeProps) => {
+}: TextTypeProps) {
+
+    // dados vindos do hook
     const {
         displayedText,
         getCurrentTextColor,
@@ -35,6 +37,7 @@ const TextType = ({
         shouldHideCursor
     } = useTextType({ text, showCursor, ...hookProps });
 
+    // cria o elemento a renderizar
     return createElement(
         Component,
         {
@@ -55,5 +58,3 @@ const TextType = ({
         )
     );
 };
-
-export default TextType;
