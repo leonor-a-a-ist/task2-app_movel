@@ -18,18 +18,17 @@ export type Person = {
 
 /**
  * Retorna um array com todos os slugs disponíveis -> ["maria", "leonor"]
- * Usado em getStaticPaths para definir todas as páginas que devem ser geradas
+ * Usado em getStaticPaths
  */
 export function getAvailablePeople() {
-    return people.map(person => person.slug);
+    return people.map((person: Person) => person.slug);
 }
 
 /**
- * Dado um slug, retorna os dados completos da pessoa (null se a pessoa não existir)
- * Usado em getStaticProps
+ * Dado um slug, retorna os dados completos da pessoa
  */
-export async function fetchPersonData(slug: string): Promise<Person | null> {
-    return people.find(person => person.slug === slug) || null;
+export function fetchPersonData(slug: string): Person | null {
+    return people.find((person: Person) => person.slug === slug) || null;
 }
 
 

@@ -54,7 +54,7 @@ export default function PersonalPage({ person }: { person: Person }) {
     );
 
     return (
-        <div className="flex flex-col justify-center items-center min-h-screen bg-neutral-900 text-white gap-8 lg:gap-12">
+        <div className="flex flex-col items-center min-h-screen bg-neutral-900 text-white gap-10">
 
             {/* Navegação entre páginas */}
             <Menu />
@@ -67,7 +67,7 @@ export default function PersonalPage({ person }: { person: Person }) {
                     {person.titleName}
                 </h1>
 
-                <div className="flex flex-col justify-center w-[95%] max-w-[900px] items-center lg:flex-row gap-8 bg-[#222] rounded-2xl shadow-2xl p-5">
+                <div className="flex flex-col justify-center w-[95%] max-w-[900px] items-center gap-8 bg-[#222] rounded-2xl shadow-2xl p-5">
 
                     {/* Imagem */}
                     <div className="shrink-0">

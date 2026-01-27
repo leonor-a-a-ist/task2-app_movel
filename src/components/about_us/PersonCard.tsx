@@ -7,6 +7,7 @@ interface PersonCardProps {
     name: string;
 }
 
+/* Acesso às páginas pessoais partindo da página about_us */
 export default function PersonCard({ href, image, name }: PersonCardProps) {
     return (
         <Link href={href} className="block text-center">
