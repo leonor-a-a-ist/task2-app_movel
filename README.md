@@ -1,40 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# Estrutura dos Ficheiros Principais 
 
-## Getting Started
+Este projeto é uma aplicação web desenvolvida em Next.js, que permite gerir um inventário de materiais, utilizando o Airtable como base de dados e Airtable Automations para notificações por email.
 
-First, run the development server:
+## src/pages/inventario.tsx
+Este ficheiro corresponde à página principal do inventário.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+É responsável por:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+    Mostrar a lista de materiais
+    Criar novos materiais
+    Editar materiais existentes
+    Eliminar materiais
+    Destacar visualmente materiais com stock baixo
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## src/pages/api/materials.ts
+Este ficheiro implementa a API, que funciona como backend da aplicação.
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+É responsável por:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+    Comunicar com a API do Airtable
+    Converter dados entre o formato do Airtable e o formato usado no frontend
+    Centralizar toda a lógica de acesso aos dados
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Endpoints implementados:
 
-## Learn More
+    GET /api/materials
+    Obtém todos os materiais do Airtable e calcula se estão em stock baixo.
 
-To learn more about Next.js, take a look at the following resources:
+    POST /api/materials
+    Cria um novo material.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+    PATCH /api/materials
+    Atualiza campos de um material existente.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+    DELETE /api/materials
+    Remove um material pelo seu Record ID.
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+# Link do repositório:
+    https://github.com/leonor-a-a-ist/task2-app_movel
+    

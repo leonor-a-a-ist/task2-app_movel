@@ -1,0 +1,24 @@
+[
+    {
+        "slug": "maria",
+        "titleName": "Maria Cordeiro",
+        "name": "Maria Pimentel Cordeiro",
+        "course": "Licenciatura em Engenharia Informática e de Computadores",
+        "hobbies": "Música, Filmes, experimentar coisas novas",
+        "funFact": "",
+        "projects": "Projetos académicos no contexto do curso e alguns projetos desenvolvidos em estágios",
+        "learn": "Desenvolver projetos em contexto real, melhorar competências técnicas e comunicação",
+        "contribute": "Responsabilidade, espírito de equipa e vontade constante de aprender"
+    },
+    {
+        "slug": "leonor",
+        "titleName": "Leonor Azevedo",
+        "name": "Leonor de Almeida e Azevedo",
+        "course": "Licenciatura em Engenharia Informática e de Computadores",
+        "hobbies": "Trabalhos manuais, desporto, experimentar cafés e restaurantes novos",
+        "funFact": "Já andei de camelo na Tunísia",
+        "projects": "Projetos académicos, no contexto do curso, e alguns projetos para candidaturas, envolvendo frontend e backend",
+        "learn": "Desenvolvimento e gestão de websites (frontend e backend), gestão de dados, utilização de novas ferramentas, capacidades de pesquisa e pensamento crítico",
+        "contribute": "Ajudar na resolução de problemas, trazendo novas ideias, e mostrar vontade e disponibilidade para aprender e trabalhar nos projetos do departamento"
+    }
+]
